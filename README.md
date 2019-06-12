@@ -12,6 +12,6 @@ Currenly only includes a simple ZipUtil to extract zip files into a folder.
             <dependency>
                 <groupId>de.terrestris</groupId>
                 <artifactId>terrestris-utils</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.2</version>
             </dependency>
 ```
