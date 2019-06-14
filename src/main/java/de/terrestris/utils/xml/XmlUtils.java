@@ -2,6 +2,7 @@ package de.terrestris.utils.xml;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,6 +38,22 @@ public class XmlUtils {
         while (!(reader.isStartElement() && list.contains(reader.getLocalName()))) {
             reader.next();
         }
+    }
+
+    /**
+     * Writes a simple element with text content.
+     *
+     * @param writer    the XMLStreamWriter
+     * @param namespace the namespace
+     * @param localName the local name
+     * @param content   the text content
+     * @throws XMLStreamException if anything goes wrong
+     */
+    public static void writeSimpleElement(XMLStreamWriter writer, String namespace, String localName, String content)
+            throws XMLStreamException {
+        writer.writeStartElement(namespace, localName);
+        writer.writeCharacters(content);
+        writer.writeEndElement();
     }
 
 }
