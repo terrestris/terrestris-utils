@@ -1,0 +1,7 @@
+<test>
+    <someElem/>
+    <otherElem/>
+    <subElem>
+        <targetElem/>
+    </subElem>
+</test>

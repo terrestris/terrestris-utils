@@ -2,7 +2,11 @@ package de.terrestris.utils.io;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -31,7 +35,7 @@ public class ZipUtils {
      */
     public static File unzip(File zipFile, File targetDir) throws IOException {
         if (!targetDir.exists()) {
-            targetDir.mkdir();
+            Files.createDirectory(targetDir.toPath());
         }
         ZipInputStream in = new ZipInputStream(new FileInputStream(zipFile));
         ZipEntry entry = in.getNextEntry();
@@ -40,7 +44,7 @@ public class ZipUtils {
         while (entry != null) {
             File newFile = new File(targetDir, entry.getName());
             if (entry.isDirectory()) {
-                newFile.mkdirs();
+                Files.createDirectories(newFile.toPath());
                 if (root == null) {
                     root = newFile;
                 }
