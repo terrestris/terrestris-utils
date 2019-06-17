@@ -15,6 +15,10 @@ import java.util.zip.ZipInputStream;
  */
 public class ZipUtils {
 
+    private ZipUtils() {
+        // prevent instantiation
+    }
+
     /**
      * Unzip the contents of the given zip file into the given directory.
      * @param zipFile the input zip

@@ -1,0 +1,11 @@
+<test xmlns="http://terrestris.de/1">
+    <someElem/>
+    <otherElem/>
+    <subElem>
+        <targetElem>
+            <subElemWithText>some text</subElemWithText>
+            <subElemWithAttr attr="123" />
+            <subElemDifferentNamespace xmlns="http://terrestris.de/2" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.terrestris.de"/>
+        </targetElem>
+    </subElem>
+</test>
