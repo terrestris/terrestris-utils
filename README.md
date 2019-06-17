@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/terrestris/terrestris-utils.svg?branch=master)](https://travis-ci.org/terrestris/terrestris-utils?branch=master) [![Coverage Status](https://coveralls.io/repos/terrestris/terrestris-utils/badge.svg?branch=master)](https://coveralls.io/r/terrestris/terrestris-utils?branch=master)
+[![Build Status](https://travis-ci.com/terrestris/terrestris-utils.svg?branch=master)](https://travis-ci.com/terrestris/terrestris-utils?branch=master) [![Coverage Status](https://coveralls.io/repos/terrestris/terrestris-utils/badge.svg?branch=master)](https://coveralls.io/r/terrestris/terrestris-utils?branch=master)
 
 # Basic Java utilities
 
