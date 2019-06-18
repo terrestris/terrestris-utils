@@ -18,13 +18,15 @@ public class ZipUtilsTest {
         IOUtils.copy(in, out);
         in.close();
         out.close();
-        ZipUtils.unzip(zipFile.toString(), zipFile.getParent());
-        String result = IOUtils.toString(new FileInputStream(new File(zipFile.getParent(), "test/sub/content")), "UTF-8");
+        File target = new File(zipFile.getParent(), "child");
+        ZipUtils.unzip(zipFile.toString(), target.toString());
+        String result = IOUtils.toString(new FileInputStream(new File(target, "test/sub/content")), "UTF-8");
         Assert.assertEquals("content", result);
-        Path dir = new File(zipFile.getParent(), "test/sub/content").toPath();
+        Path dir = new File(target, "test/sub/content").toPath();
         Files.delete(dir);
         Files.delete(dir.getParent());
         Files.delete(dir.getParent().getParent());
+        Files.delete(dir.getParent().getParent().getParent());
         Files.delete(zipFile.toPath());
     }
 
