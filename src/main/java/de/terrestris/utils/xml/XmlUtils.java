@@ -44,6 +44,9 @@ public class XmlUtils {
         List<String> list = Arrays.asList(localNames);
         while (!(reader.isStartElement() && list.contains(reader.getLocalName()))) {
             reader.next();
+            if (!reader.hasNext()) {
+                break;
+            }
         }
     }
 

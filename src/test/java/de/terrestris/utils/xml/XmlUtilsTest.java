@@ -44,6 +44,14 @@ public class XmlUtilsTest {
     }
 
     @Test
+    public void testSkipToOneOfNotFound() throws XMLStreamException {
+        InputStream in = getClass().getResourceAsStream("test.xml");
+        XMLStreamReader reader = inFactory.createXMLStreamReader(in);
+        XmlUtils.skipToOneOf(reader, "notFound");
+        Assert.assertFalse(reader.hasNext());
+    }
+
+    @Test
     public void testWriteSimpleElem() throws XMLStreamException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         XMLStreamWriter writer = outFactory.createXMLStreamWriter(out);
