@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>terrestris-utils</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <name>terrestris utils</name>
@@ -19,7 +19,7 @@
         <url>https://github.com/terrestris/terrestris-utils</url>
         <connection>scm:git:git@github.com:terrestris/terrestris-utils.git</connection>
         <developerConnection>scm:git:git@github.com:terrestris/terrestris-utils.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>terrestris-utils-0.2.0</tag>
   </scm>
 
 
