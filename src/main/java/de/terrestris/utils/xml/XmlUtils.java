@@ -2,15 +2,25 @@ package de.terrestris.utils.xml;
 
 import org.codehaus.stax2.XMLStreamReader2;
 import org.codehaus.stax2.XMLStreamWriter2;
+import org.w3c.dom.Node;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Utilities to work with StAX streams.
+ * Utilities to work with StAX streams and DOM documents.
  */
 public class XmlUtils {
 
@@ -81,6 +91,24 @@ public class XmlUtils {
         while (!(reader.isEndElement() && reader.getLocalName().equals(localName) && reader.getNamespaceURI().equals(ns))) {
             writer.copyEventFromReader(reader, true);
             reader.next();
+        }
+    }
+
+    /**
+     * Use the default transformer to serialize a DOM node to string.
+     *
+     * @param node the DOM node to serialize
+     * @return the string with the serialized XML
+     * @throws TransformerException if the transformation failed
+     * @throws IOException if the transformation failed
+     */
+    public static String domToString(Node node) throws TransformerException, IOException {
+        TransformerFactory factory = TransformerFactory.newDefaultInstance();
+        Transformer transformer = factory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            transformer.transform(new DOMSource(node), new StreamResult(bos));
+            return new String(bos.toByteArray(), StandardCharsets.UTF_8);
         }
     }
 

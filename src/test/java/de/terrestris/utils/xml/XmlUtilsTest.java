@@ -7,9 +7,17 @@ import org.codehaus.stax2.XMLStreamWriter2;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.*;
+import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -84,6 +92,21 @@ public class XmlUtilsTest {
                 + "        </targetElem>";
         String result = new String(out.toByteArray(), StandardCharsets.UTF_8);
         Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testDomToString() throws ParserConfigurationException, IOException, SAXException, TransformerException {
+        InputStream in = XmlUtilsTest.class.getResourceAsStream("domcopytest.xml");
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(in);
+        NodeList nl = doc.getDocumentElement().getElementsByTagName("subElem");
+        String result = XmlUtils.domToString(nl.item(0));
+        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><subElem>\n"
+            + "        <targetElem>\n"
+            + "            <contentEl>äncoding</contentEl>\n"
+            + "        </targetElem>\n"
+            + "    </subElem>", result);
     }
 
 }
