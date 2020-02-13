@@ -4,7 +4,8 @@
 
 Simple jar module for generic Java utilities that can be used in many projects.
 
-Currenly only includes a simple ZipUtil to extract zip files into a folder.
+Currenly includes a simple ZipUtils class to extract zip files into a folder and
+a small XmlUtils class with a couple of StAX and DOM utility functions.
 
 ## Usage
 

@@ -1,0 +1,9 @@
+<test>
+    <someElem/>
+    <otherElem/>
+    <subElem>
+        <targetElem>
+            <contentEl>äncoding</contentEl>
+        </targetElem>
+    </subElem>
+</test>
