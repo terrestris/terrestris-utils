@@ -39,7 +39,7 @@ public class ZipUtils {
      * @throws IOException in case anything goes wrong
      */
     public static File unzip(File zipFile, File targetDir) throws IOException {
-        unzip(zipFile, targetDir, false);
+        return unzip(zipFile, targetDir, false);
     }
 
     /**
