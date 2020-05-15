@@ -15,6 +15,6 @@ a small XmlUtils class with a couple of StAX and DOM utility functions.
             <dependency>
                 <groupId>de.terrestris</groupId>
                 <artifactId>terrestris-utils</artifactId>
-                <version>0.3.0</version>
+                <version>0.3.1</version>
             </dependency>
 ```
