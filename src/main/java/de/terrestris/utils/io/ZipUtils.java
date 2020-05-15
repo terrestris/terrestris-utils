@@ -2,6 +2,8 @@ package de.terrestris.utils.io;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +17,8 @@ import java.util.zip.ZipInputStream;
  * Utility functions related to zip files/streams.
  */
 public class ZipUtils {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ZipUtils.class);
 
     private ZipUtils() {
         // prevent instantiation
@@ -71,6 +75,8 @@ public class ZipUtils {
                             FileUtils.cleanDirectory(root);
                         } catch (Exception e) {
                             // ignore if e.g. locked files cannot be deleted
+                            LOG.debug("Couldn't clean target directory: {}", e.getMessage());
+                            LOG.trace("Stack trace:", e);
                         }
                     }
                 }
