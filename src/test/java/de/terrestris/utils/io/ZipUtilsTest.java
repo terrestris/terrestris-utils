@@ -40,7 +40,7 @@ public class ZipUtilsTest {
         in.close();
         out.close();
         File target = new File(zipFile.getParent(), "child");
-        ZipUtils.unzip(zipFile.toString(), target.toString(), true);
+        ZipUtils.unzip(zipFile, target, true);
         String result = IOUtils.toString(new FileInputStream(new File(target, "test/sub/content")), StandardCharsets.UTF_8);
         Assert.assertEquals("content", result);
         Path dir = new File(target, "test/sub/content").toPath();
