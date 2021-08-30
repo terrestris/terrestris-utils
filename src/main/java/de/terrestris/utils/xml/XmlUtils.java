@@ -4,6 +4,7 @@ import org.codehaus.stax2.XMLStreamReader2;
 import org.codehaus.stax2.XMLStreamWriter2;
 import org.w3c.dom.Node;
 
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
@@ -15,9 +16,12 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static javax.xml.stream.XMLStreamConstants.END_DOCUMENT;
 
 /**
  * Utilities to work with StAX streams and DOM documents.
@@ -70,7 +74,7 @@ public class XmlUtils {
      * @throws XMLStreamException if anything goes wrong
      */
     public static void writeSimpleElement(XMLStreamWriter writer, String namespace, String localName, String content)
-            throws XMLStreamException {
+        throws XMLStreamException {
         writer.writeStartElement(namespace, localName);
         writer.writeCharacters(content);
         writer.writeEndElement();
@@ -100,7 +104,7 @@ public class XmlUtils {
      * @param node the DOM node to serialize
      * @return the string with the serialized XML
      * @throws TransformerException if the transformation failed
-     * @throws IOException if the transformation failed
+     * @throws IOException          if the transformation failed
      */
     public static String domToString(Node node) throws TransformerException, IOException {
         TransformerFactory factory = TransformerFactory.newDefaultInstance();
@@ -108,8 +112,29 @@ public class XmlUtils {
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             transformer.transform(new DOMSource(node), new StreamResult(bos));
-            return new String(bos.toByteArray(), StandardCharsets.UTF_8);
+            return bos.toString(UTF_8);
         }
+    }
+
+    /**
+     * Move the reader to the next {@link XMLStreamConstants #START_ELEMENT} or {@link XMLStreamConstants #END_ELEMENT}
+     * event.
+     *
+     * @param xmlReader the XML stream reader
+     * @return either the start or end element event type
+     * @throws XMLStreamException     if anything goes wrong
+     * @throws NoSuchElementException if the end of the document is reached
+     */
+    public static int nextElement(XMLStreamReader xmlReader)
+        throws XMLStreamException, NoSuchElementException {
+        xmlReader.next();
+        while (xmlReader.getEventType() != END_DOCUMENT && !xmlReader.isStartElement() && !xmlReader.isEndElement()) {
+            xmlReader.next();
+        }
+        if (xmlReader.getEventType() == END_DOCUMENT) {
+            throw new NoSuchElementException();
+        }
+        return xmlReader.getEventType();
     }
 
 }

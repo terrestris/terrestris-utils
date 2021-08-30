@@ -18,3 +18,5 @@ a small XmlUtils class with a couple of StAX and DOM utility functions.
                 <version>0.3.1</version>
             </dependency>
 ```
+
+Note that log4j2 is used for logging, make sure you add that dependency to your project.

@@ -2,8 +2,7 @@ package de.terrestris.utils.io;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,12 +12,14 @@ import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 /**
  * Utility functions related to zip files/streams.
  */
 public class ZipUtils {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ZipUtils.class);
+    private static final Logger LOG = getLogger(ZipUtils.class);
 
     private ZipUtils() {
         // prevent instantiation
