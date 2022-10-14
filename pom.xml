@@ -151,7 +151,7 @@
         <plugin>
           <groupId>de.terrestris</groupId>
           <artifactId>i18n-maven-plugin</artifactId>
-          <version>0.0.3</version>
+          <version>1.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
