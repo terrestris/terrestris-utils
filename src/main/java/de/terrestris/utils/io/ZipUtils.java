@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -61,10 +62,26 @@ public class ZipUtils {
    * @throws IOException in case anything goes wrong
    */
   public static File unzip(File zipFile, File targetDir, boolean replace) throws IOException {
+    return unzip(zipFile, targetDir, replace, Charset.defaultCharset());
+  }
+
+    /**
+     * Unzip the contents of the given zip file into the given directory. If replace is set to true, the directory will be
+     * cleaned if existing and not empty. If anything goes wrong while cleaning, the error is ignored and the unzip will
+     * still commence.
+     *
+     * @param zipFile   the input zip
+     * @param targetDir the output directory
+     * @param replace   if true, the contents of the directory will be deleted before unzip, if it exists
+     * @param charset   the file name charset of the zip directory
+     * @return the first directory contained in the archive
+     * @throws IOException in case anything goes wrong
+     */
+  public static File unzip(File zipFile, File targetDir, boolean replace, Charset charset) throws IOException {
     if (!targetDir.exists()) {
       Files.createDirectory(targetDir.toPath());
     }
-    ZipInputStream in = new ZipInputStream(new FileInputStream(zipFile));
+    ZipInputStream in = new ZipInputStream(new FileInputStream(zipFile), charset);
     ZipEntry entry = in.getNextEntry();
     File root = null;
 
