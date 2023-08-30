@@ -59,6 +59,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.host.url>https://sq.terrestris.de</sonar.host.url>
+    <sonar.login>terrestris</sonar.login>
+    <sonar.sources>src/main/</sonar.sources>
   </properties>
 
   <profiles>
@@ -99,6 +102,11 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.9.1.2184</version>
+        </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
