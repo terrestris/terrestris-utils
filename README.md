@@ -1,4 +1,4 @@
-[![build and analyse](https://github.com/github/docs/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/terrestris/terrestris-utils/actions/workflows/build.yml) [![Coverage Status](https://coveralls.io/repos/terrestris/terrestris-utils/badge.svg?branch=main)](https://coveralls.io/r/terrestris/terrestris-utils?branch=main)
+[![build and analyse](https://github.com/terrestris/terrestris-utils/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/terrestris/terrestris-utils/actions/workflows/build.yml) [![Coverage Status](https://coveralls.io/repos/terrestris/terrestris-utils/badge.svg)](https://coveralls.io/r/terrestris/terrestris-utils)
 
 # Basic Java utilities
 
