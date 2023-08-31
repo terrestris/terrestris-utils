@@ -1,4 +1,4 @@
-name: build
+name: build and analyse
 
 on: [push]
 
@@ -12,9 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+          cache: 'maven'
       - run: mvn -B install --no-transfer-progress
       - name: Analyse code and publish to SonarQube 📊
         run: mvn -B -Dsonar.password=${{ secrets.SONAR_PASSWORD }} sonar:sonar
