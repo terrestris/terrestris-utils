@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.com/terrestris/terrestris-utils.svg?branch=master)](https://travis-ci.com/terrestris/terrestris-utils?branch=master) [![Coverage Status](https://coveralls.io/repos/terrestris/terrestris-utils/badge.svg?branch=master)](https://coveralls.io/r/terrestris/terrestris-utils?branch=master)
+[![build and analyse](https://github.com/github/docs/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/terrestris/terrestris-utils/actions/workflows/build.yml) [![Coverage Status](https://coveralls.io/repos/terrestris/terrestris-utils/badge.svg?branch=main)](https://coveralls.io/r/terrestris/terrestris-utils?branch=main)
 
 # Basic Java utilities
 
 Simple jar module for generic Java utilities that can be used in many projects.
 
-Currenly includes a simple ZipUtils class to extract zip files into a folder and
-a small XmlUtils class with a couple of StAX and DOM utility functions.
+Currently, this includes a simple `ZipUtils` class to extract zip files into a folder and
+a small `XmlUtils` class with a couple of StAX and DOM utility functions.
 
 ## Usage
 
