@@ -97,7 +97,6 @@ public class ZipUtils {
         in.closeEntry();
         entry = in.getNextEntry();
       }
-      in.close();
       return root;
     }
   }
