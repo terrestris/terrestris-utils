@@ -125,8 +125,7 @@ public class XmlUtils {
    * @throws XMLStreamException     if anything goes wrong
    * @throws NoSuchElementException if the end of the document is reached
    */
-  public static int nextElement(XMLStreamReader xmlReader)
-    throws XMLStreamException, NoSuchElementException {
+  public static int nextElement(XMLStreamReader xmlReader) throws XMLStreamException {
     xmlReader.next();
     while (xmlReader.getEventType() != END_DOCUMENT && !xmlReader.isStartElement() && !xmlReader.isEndElement()) {
       xmlReader.next();

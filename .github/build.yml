@@ -16,3 +16,5 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - run: mvn -B install --no-transfer-progress
+      - name: Analyse code and publish to SonarQube 📊
+        run: mvn -B -Dsonar.password=${{ secrets.SONAR_PASSWORD }} sonar:sonar
