@@ -81,35 +81,41 @@ public class ZipUtils {
     if (!targetDir.exists()) {
       Files.createDirectory(targetDir.toPath());
     }
-    ZipInputStream in = new ZipInputStream(new FileInputStream(zipFile), charset);
-    ZipEntry entry = in.getNextEntry();
-    File root = null;
+    try (ZipInputStream in = new ZipInputStream(new FileInputStream(zipFile), charset)) {
+      ZipEntry entry = in.getNextEntry();
+      File root = null;
 
-    while (entry != null) {
-      File newFile = new File(targetDir, entry.getName());
-      if (entry.isDirectory()) {
-        Files.createDirectories(newFile.toPath());
-        if (root == null) {
-          root = newFile;
-          if (replace) {
-            try {
-              FileUtils.cleanDirectory(root);
-            } catch (Exception e) {
-              // ignore if e.g. locked files cannot be deleted
-              LOG.debug("Couldn't clean target directory: {}", e.getMessage());
-              LOG.trace("Stack trace:", e);
-            }
-          }
+      while (entry != null) {
+        File newFile = new File(targetDir, entry.getName());
+        if (entry.isDirectory()) {
+          root = handleDirectory(replace, newFile, root);
+        } else {
+          FileOutputStream out = new FileOutputStream(newFile);
+          IOUtils.copyLarge(in, out, 0, entry.getSize());
+          out.close();
         }
-      } else {
-        FileOutputStream out = new FileOutputStream(newFile);
-        IOUtils.copyLarge(in, out, 0, entry.getSize());
-        out.close();
+        in.closeEntry();
+        entry = in.getNextEntry();
       }
-      in.closeEntry();
-      entry = in.getNextEntry();
+      in.close();
+      return root;
     }
-    in.close();
+  }
+
+  private static File handleDirectory(boolean replace, File newFile, File root) throws IOException {
+    Files.createDirectories(newFile.toPath());
+    if (root == null) {
+      root = newFile;
+      if (replace) {
+        try {
+          FileUtils.cleanDirectory(root);
+        } catch (Exception e) {
+          // ignore if e.g. locked files cannot be deleted
+          LOG.debug("Couldn't clean target directory: {}", e.getMessage());
+          LOG.trace("Stack trace:", e);
+        }
+      }
+    }
     return root;
   }
 
