@@ -16,7 +16,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java-version }}
-          distribution: 'temurin'
           cache: 'maven'
       - run: mvn -B install --no-transfer-progress
       - name: Analyse code and publish to SonarQube 📊
