@@ -4,14 +4,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -24,6 +22,40 @@ public class ZipUtils {
 
   private ZipUtils() {
     // prevent instantiation
+  }
+
+  private static void zip(ZipOutputStream zout, File file, String filename) throws IOException {
+    if (file.isFile()) {
+      ZipEntry entry = new ZipEntry(filename);
+      zout.putNextEntry(entry);
+      try (InputStream in = Files.newInputStream(file.toPath())) {
+        IOUtils.copy(in, zout);
+      }
+    } else {
+      ZipEntry entry = new ZipEntry(filename + "/");
+      zout.putNextEntry(entry);
+      File[] files = file.listFiles();
+      if (files != null) {
+        for (File f : files) {
+          zip(zout, f, filename + (filename.isEmpty() ? "" : "/") + f.getName());
+        }
+      }
+    }
+  }
+
+  /**
+   * Zip an entire directory.
+   *
+   * @param zipFile the zip file
+   * @param directory the directory to zip
+   * @param skipParent whether to include the directory in the zip
+   * @throws IOException in case anything goes wrong
+   */
+  public static void zip(File zipFile, File directory, boolean skipParent) throws IOException {
+    ZipOutputStream zout = new ZipOutputStream(Files.newOutputStream(zipFile.toPath()));
+    zip(zout, directory, skipParent ? "" : directory.getName());
+    zout.finish();
+    zout.close();
   }
 
   /**
