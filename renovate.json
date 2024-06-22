@@ -3,8 +3,5 @@
     "config:recommended"
   ],
   "automerge": true,
-  "dependencyDashboardAutoclose": false,
-  "packageRules": [{
-    "automerge": true
-  }]
+  "dependencyDashboardAutoclose": false
 }
