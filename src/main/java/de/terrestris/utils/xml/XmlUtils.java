@@ -33,7 +33,7 @@ public class XmlUtils {
   }
 
   /**
-   * Skip the stream to the next element with the given local name. Precondition can be anything, postcondition will be
+   * Skip the stream to the next element with the given local name. Precondition can be anything, post condition will be
    * START_ELEMENT.
    *
    * @param reader    the XML stream reader
@@ -47,7 +47,7 @@ public class XmlUtils {
   }
 
   /**
-   * Skips the stream to the first occurrence of any of the given local names. Precondition can be anything, postcondition
+   * Skips the stream to the first occurrence of the given local names. Precondition can be anything, post condition
    * will be START_ELEMENT.
    *
    * @param reader     the XML stream reader
@@ -117,8 +117,7 @@ public class XmlUtils {
   }
 
   /**
-   * Move the reader to the next {@link XMLStreamConstants #START_ELEMENT} or {@link XMLStreamConstants #END_ELEMENT}
-   * event.
+   * Move the reader to the next {@link XMLStreamConstants #START_ELEMENT} event.
    *
    * @param xmlReader the XML stream reader
    * @return either the start or end element event type
@@ -126,10 +125,9 @@ public class XmlUtils {
    * @throws NoSuchElementException if the end of the document is reached
    */
   public static int nextElement(XMLStreamReader xmlReader) throws XMLStreamException {
-    xmlReader.next();
-    while (xmlReader.getEventType() != END_DOCUMENT && !xmlReader.isStartElement() && !xmlReader.isEndElement()) {
+    do {
       xmlReader.next();
-    }
+    } while (xmlReader.getEventType() != END_DOCUMENT && !xmlReader.isStartElement());
     if (xmlReader.getEventType() == END_DOCUMENT) {
       throw new NoSuchElementException();
     }
