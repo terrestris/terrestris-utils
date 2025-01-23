@@ -32,8 +32,10 @@ public class ZipUtils {
         IOUtils.copy(in, zout);
       }
     } else {
-      ZipEntry entry = new ZipEntry(filename + "/");
-      zout.putNextEntry(entry);
+      if (!filename.isEmpty()) {
+        ZipEntry entry = new ZipEntry(filename + "/");
+        zout.putNextEntry(entry);
+      }
       File[] files = file.listFiles();
       if (files != null) {
         for (File f : files) {
