@@ -47,6 +47,21 @@ public class XmlUtils {
   }
 
   /**
+   * Skip the stream to the next element with the given local names, whichever comes first. The first local name will
+   * be matched if we have a START_ELEMENT event, the second local name will be matched if we have an END_ELEMENT event.
+   *
+   * @param reader    the XML stream reader
+   * @param localName the desired local name
+   * @param localNameEnd the end element local name
+   * @throws XMLStreamException if anything goes wrong
+   */
+  public static void skipToElementOrEnd(XMLStreamReader reader, String localName, String localNameEnd) throws XMLStreamException {
+    while (!(reader.isStartElement() && reader.getLocalName().equals(localName)) && !(reader.isEndElement() && reader.getLocalName().equals(localNameEnd))) {
+      reader.next();
+    }
+  }
+
+  /**
    * Skips the stream to the first occurrence of the given local names. Precondition can be anything, post condition
    * will be START_ELEMENT.
    *
