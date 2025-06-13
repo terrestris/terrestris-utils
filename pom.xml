@@ -60,7 +60,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.host.url>https://sq.terrestris.de</sonar.host.url>
-    <sonar.login>terrestris</sonar.login>
     <sonar.sources>src/main/</sonar.sources>
   </properties>
 
