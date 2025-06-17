@@ -5,7 +5,7 @@
 
   <artifactId>terrestris-utils</artifactId>
   <groupId>de.terrestris</groupId>
-  <version>1.1.2-SNAPSHOT</version>
+  <version>1.2.0</version>
   <packaging>jar</packaging>
 
   <name>terrestris utils</name>
@@ -14,7 +14,7 @@
     <url>https://github.com/terrestris/terrestris-utils</url>
     <connection>scm:git:git@github.com:terrestris/terrestris-utils.git</connection>
     <developerConnection>scm:git:git@github.com:terrestris/terrestris-utils.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v1.2.0</tag>
   </scm>
 
   <distributionManagement>
