@@ -19,24 +19,36 @@
 
   <distributionManagement>
     <repository>
-      <id>nexus.terrestris.de-releases</id>
-      <name>Nexus Release Repository</name>
-      <url>https://nexus.terrestris.de/repository/misc/</url>
+      <id>reposilite-repository-releases</id>
+      <name>terrestris Maven repository</name>
+      <url>https://maven.terrestris.de/releases</url>
     </repository>
     <snapshotRepository>
-      <id>nexus.terrestris.de-snapshots</id>
-      <name>SHOGun Snapshot Repository</name>
-      <url>https://nexus.terrestris.de/repository/misc/</url>
+      <id>reposilite-repository-snapshots</id>
+      <name>terrestris Maven repository</name>
+      <url>https://maven.terrestris.de/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
   <repositories>
     <repository>
-      <id>nexus.terrestris.de</id>
-      <url>https://nexus.terrestris.de/repository/public/</url>
+      <id>reposilite-repository-releases</id>
+      <name>terrestris Maven repository</name>
+      <url>https://maven.terrestris.de/releases</url>
       <releases>
         <enabled>true</enabled>
         <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>reposilite-repository-snapshots</id>
+      <name>terrestris Maven repository</name>
+      <url>https://maven.terrestris.de/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
       </releases>
       <snapshots>
         <enabled>true</enabled>
@@ -46,10 +58,22 @@
 
   <pluginRepositories>
     <pluginRepository>
-      <id>nexus.terrestris.de-plugins</id>
-      <url>https://nexus.terrestris.de/repository/public/</url>
+      <id>reposilite-repository-releases</id>
+      <name>terrestris Maven repository</name>
+      <url>https://maven.terrestris.de/releases</url>
       <releases>
         <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>reposilite-repository-snapshots</id>
+      <name>terrestris Maven repository</name>
+      <url>https://maven.terrestris.de/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
       </releases>
       <snapshots>
         <enabled>true</enabled>
